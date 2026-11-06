@@ -19,7 +19,46 @@ class JustPayApp extends StatelessWidget {
       fontFamily: 'Roboto',
       appBarTheme: const AppBarTheme(backgroundColor: pale, foregroundColor: navy, elevation: 0),
     ),
-    home: const MainShell(),
+    home: const DemoLoginPage(),
+  );
+}
+
+class DemoLoginPage extends StatefulWidget {
+  const DemoLoginPage({super.key});
+  @override
+  State<DemoLoginPage> createState() => _DemoLoginPageState();
+}
+
+class _DemoLoginPageState extends State<DemoLoginPage> {
+  final email = TextEditingController();
+  final password = TextEditingController();
+  @override
+  void dispose() { email.dispose(); password.dispose(); super.dispose(); }
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: SafeArea(child: Center(child: SingleChildScrollView(padding: const EdgeInsets.all(24), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(width: 58, height: 58, decoration: BoxDecoration(color: navy, borderRadius: BorderRadius.circular(19)), child: const Icon(Icons.account_balance_wallet_rounded, color: Colors.white, size: 30)),
+      const SizedBox(height: 30),
+      const Text('Welcome to JustPay', style: TextStyle(fontSize: 29, fontWeight: FontWeight.w900, color: navy)),
+      const SizedBox(height: 8),
+      const Text('A simple preview of a modern wallet experience.', style: TextStyle(color: Colors.black54)),
+      const SizedBox(height: 28),
+      const Text('Email address', style: TextStyle(fontWeight: FontWeight.w700, color: navy)),
+      const SizedBox(height: 8),
+      TextField(controller: email, keyboardType: TextInputType.emailAddress, decoration: InputDecoration(hintText: 'name@example.com', filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))),
+      const SizedBox(height: 16),
+      const Text('Password', style: TextStyle(fontWeight: FontWeight.w700, color: navy)),
+      const SizedBox(height: 8),
+      TextField(controller: password, obscureText: true, decoration: InputDecoration(hintText: 'Enter a demo password', filled: true, fillColor: Colors.white, border: OutlineInputBorder(borderRadius: BorderRadius.circular(14), borderSide: BorderSide.none))),
+      const SizedBox(height: 20),
+      SizedBox(width: double.infinity, child: FilledButton(onPressed: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => const MainShell()));
+      }, style: FilledButton.styleFrom(backgroundColor: blue, padding: const EdgeInsets.symmetric(vertical: 16)), child: const Text('Continue to demo'))),
+      const SizedBox(height: 14),
+      const Center(child: Text('Demo access only • No account is created', style: TextStyle(color: Colors.black54, fontSize: 12))),
+      const SizedBox(height: 24),
+      const Center(child: Text('JUSTPAY  •  EDUCATIONAL PROTOTYPE', style: TextStyle(color: Colors.black38, fontSize: 10, letterSpacing: 1))),
+    ])))),
   );
 }
 
